@@ -1,0 +1,52 @@
+[gd_scene load_steps=13 format=3 uid="uid://dy40goi7m04j"]
+
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/grid_inventory.gd" id="1_yxb57"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/view/grid_inventory_view.gd" id="2_occm0"]
+[ext_resource type="PackedScene" uid="uid://b6u763jmm1l36" path="res://addons/inventoric/extensions/grid_inventory/scenes/grid_item.tscn" id="3_d8fhw"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/config/grid_inventory_view_config.gd" id="4_rn2o8"]
+[ext_resource type="PackedScene" uid="uid://bxwcmn7i2qoif" path="res://addons/inventoric/extensions/grid_inventory/scenes/grid_slot.tscn" id="5_xgsdj"]
+[ext_resource type="StyleBox" uid="uid://cb4mf3bybwvtm" path="res://addons/inventoric/extensions/grid_inventory/style/slot_default_style.tres" id="6_x10bq"]
+[ext_resource type="StyleBox" uid="uid://bf1l1rdmi5lku" path="res://addons/inventoric/extensions/grid_inventory/style/slot_drag_from_style.tres" id="7_gm3u6"]
+[ext_resource type="StyleBox" uid="uid://ujj167hx31cp" path="res://addons/inventoric/extensions/grid_inventory/style/slot_drag_to_style.tres" id="8_gwtah"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/config/grid_slot_view_config.gd" id="9_nwh33"]
+[ext_resource type="StyleBox" uid="uid://cod3wwb4qhqq5" path="res://addons/inventoric/extensions/grid_inventory/style/slot_selected_style.tres" id="10_t8ryr"]
+
+[sub_resource type="Resource" id="Resource_7hakm"]
+script = ExtResource("4_rn2o8")
+spacing_v = 0.0
+spacing_h = 0.0
+item_scene = ExtResource("3_d8fhw")
+slot_scene = ExtResource("5_xgsdj")
+
+[sub_resource type="Resource" id="Resource_5137f"]
+script = ExtResource("9_nwh33")
+size_h = 64.0
+size_v = 64.0
+padding_h = 8.0
+padding_v = 8.0
+default_style = ExtResource("6_x10bq")
+selected_style = ExtResource("10_t8ryr")
+drag_from_style = ExtResource("7_gm3u6")
+drag_to_style = ExtResource("8_gwtah")
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridInventory" type="Node" parent="."]
+script = ExtResource("1_yxb57")
+
+[node name="GridInventoryView" type="Control" parent="." node_paths=PackedStringArray("inventory")]
+anchors_preset = 0
+offset_left = 85.29
+offset_top = 78.595
+offset_right = 138.23
+offset_bottom = 133.045
+script = ExtResource("2_occm0")
+config = SubResource("Resource_7hakm")
+slot_view_config = SubResource("Resource_5137f")
+inventory = NodePath("../GridInventory")
