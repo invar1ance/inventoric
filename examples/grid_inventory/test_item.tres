@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ICItemConfig" load_steps=3 format=3 uid="uid://w1qshuw2crwv"]
+
+[ext_resource type="Script" path="res://addons/inventoric/logic/config/item_config.gd" id="1_jear7"]
+[ext_resource type="Texture2D" uid="uid://wf10c4eq34l2" path="res://addons/inventoric/sprites/icon.svg" id="1_r1dln"]
+
+[resource]
+script = ExtResource("1_jear7")
+name = "Test Item"
+icon = ExtResource("1_r1dln")
