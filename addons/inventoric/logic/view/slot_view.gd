@@ -1,24 +1,23 @@
 class_name ICSlotView extends Control
 
-signal slot_item_view_changed(slot_view: ICSlotView)
-
 var config: ICSlotViewConfig
-var item_view: ICItemView
+var inventory_view: ICInventoryView
 var idx: int
+var item_view: ICItemView
 
-func place_item_view(item_view: ICItemView) -> void:
-	self.item_view = item_view
+func set_item_view(new_item_view: ICItemView) -> void:
+	item_view = new_item_view
 	default_highlight()
-	if item_view != null:
-		if item_view.get_parent() == null:
+
+	if new_item_view != null:
+		if new_item_view.get_parent() == null:
 			add_child(item_view)
 		else:
-			item_view.reparent(self)
+			new_item_view.reparent(self)
 	
-	slot_item_view_changed.emit(self)
 	item_view_reset_position()
 	item_view_reset_size()
-	
+
 func default_highlight() -> void:
 	pass
 	
@@ -59,16 +58,13 @@ func item_view_reset_size() -> void:
 	
 	var item_size = size - Vector2(config.padding_h, config.padding_v) * 2
 	item_view.resize(item_size)
-
-func swap_item_view(with: ICSlotView) -> void:
-	var with_item_view: ICItemView
-	if with.has_item_view():
-		with_item_view = with.item_view
 	
-	with.place_item_view(item_view)
-	place_item_view(with_item_view)
+func clear_item_view() -> void:
+	if item_view != null:
+		item_view.queue_free()
 
-func init(config: ICSlotViewConfig, idx: int) -> void:
-	self.config = config
+func init(inventory_view: ICInventoryView, idx: int, config: ICSlotViewConfig) -> void:
+	self.inventory_view = inventory_view
 	self.idx = idx
+	self.config = config
 	default_highlight()

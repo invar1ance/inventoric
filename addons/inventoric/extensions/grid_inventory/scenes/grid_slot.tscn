@@ -1,38 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxwcmn7i2qoif"]
+[gd_scene load_steps=2 format=3 uid="uid://bxwcmn7i2qoif"]
 
 [ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/view/grid_slot_view.gd" id="1_skqpx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xlvg"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4la08"]
-bg_color = Color(0.741385, 0.741385, 0.741385, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpnk7"]
-bg_color = Color(0.638661, 0.638661, 0.638661, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmk67"]
-bg_color = Color(0.983801, 0.568121, 0.855716, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 1)
 
 [node name="GridSlot" type="Control"]
 layout_mode = 3
@@ -41,12 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_skqpx")
-default_style = SubResource("StyleBoxFlat_2xlvg")
-selected_style = SubResource("StyleBoxFlat_4la08")
-drag_from_style = SubResource("StyleBoxFlat_wpnk7")
-drag_to_style = SubResource("StyleBoxFlat_dmk67")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -55,4 +19,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2

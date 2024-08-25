@@ -1,4 +1,0 @@
-class_name ICItemConfig extends Resource
-
-@export var name: String
-@export var icon: Texture2D

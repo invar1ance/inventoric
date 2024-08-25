@@ -2,12 +2,12 @@
 extends EditorPlugin
 
 func _enter_tree():
-	add_autoload_singleton("InventoryObserver", "res://addons/inventoric/logic/inventory_observer.gd")
+	add_autoload_singleton("InventoryViewManager", "res://addons/inventoric/logic/inventory_view_manager.gd")
 	_add_default_action()
 	
 
 func _exit_tree():
-	remove_autoload_singleton("InventoryObserver")
+	remove_autoload_singleton("InventoryViewManager")
 	_remove_default_action()
 
 func _add_default_action() -> void:

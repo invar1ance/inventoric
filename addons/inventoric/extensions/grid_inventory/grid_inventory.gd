@@ -1,8 +1,8 @@
+@icon("res://addons/inventoric/sprites/grid_inventory_icon.png")
 class_name GridInventory extends ICInventory
-
-@export_range(1, 100, 1) var grid_size_h: int = 5
-@export_range(1, 100, 1) var grid_size_v: int = 5
-@export var strict_order: bool = true
 	
 func _ready() -> void:
-	items = Collection.new(grid_size_h * grid_size_v)
+	super._ready()
+	assert(config is GridInventoryConfig, "Inventory config must be GridInventoryConfig.")
+	
+	slots = Collection.new(config.size_h * config.size_v)

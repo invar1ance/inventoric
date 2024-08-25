@@ -1,12 +1,9 @@
-class_name ICItem extends Object
+class_name ICItem
 
-signal removed
-
-var config: ICItemConfig
+var _config: ICItemConfig
 
 func _init(config: ICItemConfig) -> void:
-	self.config = config
+	_config = config
 
-func remove() -> void:
-	removed.emit()
-	free()
+func get_config() -> ICItemConfig:
+	return _config
