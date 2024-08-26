@@ -1,4 +1,4 @@
-class_name GridPositionHelper
+class_name GridCoordinator
 
 static func get_idx(size_v: int, point: Vector2i) -> int:
 	return point.x * size_v + point.y
