@@ -52,6 +52,8 @@ func generate_inventory_view(slots: Collection) -> void:
 			if item != null: 
 				var item_view = generate_item_view(item)
 				slot_view.set_item_view(item_view)
+				
+	resize()
 
 func resize() -> void:
 	pass

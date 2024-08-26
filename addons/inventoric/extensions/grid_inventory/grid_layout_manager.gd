@@ -1,7 +1,7 @@
 class_name GridLayoutManager extends ICLayoutManager
 
 static func editor_render_ready(view: ICInventoryView) -> bool:
-	return Engine.is_editor_hint() and view.debug and view.inventory != null and view.inventory.config != null and view.slot_view_config != null and view.config != null
+	return view.debug and view.inventory != null and view.inventory.config != null and view.slot_view_config != null and view.config != null
 
 static func get_container_size(view: ICInventoryView) -> Vector2:
 	if not editor_render_ready(view):

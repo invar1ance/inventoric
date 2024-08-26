@@ -1,7 +1,7 @@
 class_name ICInventoryConfigurator
 
-func configure(view: ICInventoryView) -> void:
+static func configure(view: ICInventoryView) -> void:
 	pass
 
-func handles(view: Object) -> bool:
+static func handles(view: Object) -> bool:
 	return false

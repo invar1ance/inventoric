@@ -1,9 +1,9 @@
 extends ICInventoryConfigurator
 
-func handles(object: Object) -> bool:
+static func handles(object: Object) -> bool:
 	return object is GridInventoryView and Engine.is_editor_hint()
 
-func configure(view: ICInventoryView) -> void:
+static func configure(view: ICInventoryView) -> void:
 	var view_config = view.config as GridInventoryViewConfig
 	if view_config != null:
 		if view_config.item_scene == null:

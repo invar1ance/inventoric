@@ -40,6 +40,3 @@ func _get_configuration_warnings() -> PackedStringArray:
 		errors.append("SlotViewConfig requires")
 	
 	return errors
-
-func _notification(what: int) -> void:
-	print(what)

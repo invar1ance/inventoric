@@ -83,16 +83,17 @@ config = SubResource("Resource_cmhg6")
 [node name="GridInventoryView" type="Control" parent="." node_paths=PackedStringArray("inventory")]
 custom_minimum_size = Vector2(320, 320)
 anchors_preset = 0
-offset_left = 38.0
-offset_top = 14.0
-offset_right = 358.0
-offset_bottom = 334.0
+offset_left = 48.0
+offset_top = 26.0
+offset_right = 368.0
+offset_bottom = 346.0
 script = ExtResource("3_q6un4")
 config = SubResource("Resource_sdkr4")
 slot_view_config = SubResource("Resource_kkns6")
 inventory = NodePath("../GridInventory")
 
 [node name="Button" type="Button" parent="."]
+layout_mode = 0
 offset_left = 440.0
 offset_top = 362.0
 offset_right = 647.0
@@ -110,9 +111,9 @@ custom_minimum_size = Vector2(192, 320)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 445.0
-offset_top = 7.0
+offset_top = 23.0
 offset_right = 637.0
-offset_bottom = 327.0
+offset_bottom = 343.0
 script = ExtResource("3_q6un4")
 config = SubResource("Resource_xigw6")
 slot_view_config = SubResource("Resource_1ckgd")

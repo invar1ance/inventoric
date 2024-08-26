@@ -2,15 +2,16 @@
 extends EditorPlugin
 
 var _editor_scripts: Array
-var _views: Array
+var _tracked_views: Array[Node]
+var _preview_canvas_items: Dictionary
 
 func _enter_tree():
 	add_autoload_singleton("Inventoric", "res://addons/inventoric/logic/manager/inventory_view_manager.gd")
 	_add_default_action()
-	_load_editor_scripts()
+	_register_editor_scripts()
 	
 	scene_changed.connect(_on_scene_changed)
-	_refresh_handled_views()
+	_refresh_tracked_views()
 	_apply_editor_scripts()
 
 func _exit_tree():
@@ -40,34 +41,38 @@ func _remove_default_action() -> void:
 	ProjectSettings.save()
 
 func _on_scene_changed(root: Node) -> void:
-	_refresh_handled_views()
+	_refresh_tracked_views()
 
 func _edit(object: Object) -> void:
-	_refresh_handled_views()
+	_refresh_tracked_views()
 
 func _handles(object: Object) -> bool:
-	return object is ICInventory or object is ICInventoryView or object is ICInventoryViewConfig or object is ICInventoryConfig or object is ICSlotViewConfig
+	return Engine.is_editor_hint() and object is ICInventory or object is ICInventoryView or object is ICInventoryViewConfig or object is ICInventoryConfig or object is ICSlotViewConfig
 
 func _apply_editor_scripts() -> void:
 	var scene = get_editor_interface().get_edited_scene_root()
 
-	for view in _views:
+	for view in _tracked_views:
 		for es in _editor_scripts:
 			if es is ICInventoryPreviewer and es.handles(view):
-				es.redraw(view)
+				if _preview_canvas_items.has(view):
+					es.clear_canvas_item(_preview_canvas_items.get(view))
+				var canvas_item = es.create_canvas_item(view)
+				_preview_canvas_items[view] = canvas_item
+				es.draw(canvas_item, view)
 			if es is ICInventoryConfigurator and es.handles(view):
 				es.configure(view)
 			if es is ICInventoryResizer and es.handles(view):
 				es.resize(view)
 
-func _refresh_handled_views() -> void:
-	if get_editor_interface() == null or get_editor_interface().get_edited_scene_root() == null:
-		_views = []
-		return
-	
-	_views = get_editor_interface().get_edited_scene_root().find_children("*", "ICInventoryView", true)
+func _refresh_tracked_views() -> void:
+	var result = []
+	if get_editor_interface() != null and get_editor_interface().get_edited_scene_root() != null:
+		result = get_editor_interface().get_edited_scene_root().find_children("*", "ICInventoryView", true)
+		
+	_tracked_views = result
 
-func _load_editor_scripts() -> void:
+func _register_editor_scripts() -> void:
 	var root = DirAccess.open("res://addons/inventoric/extensions")
 
 	for path in root.get_directories():
@@ -82,10 +87,16 @@ func _load_editor_scripts() -> void:
 				_editor_scripts.append(script)
 
 func _unload_editor_scripts() -> void:
-	for es in _editor_scripts:
-		if es is ICInventoryPreviewer:
-			es.clear_canvas_item()
+	print("unload")
+	for view in _tracked_views:
+		for es in _editor_scripts:
+			if es is ICInventoryPreviewer and es.handles(view):
+				if _preview_canvas_items.has(view):
+					es.clear_canvas_item(_preview_canvas_items.get(view))
+	
+	_preview_canvas_items.clear()
 	_editor_scripts.clear()
+	_tracked_views.clear()
 
 func _process(delta: float) -> void:
 	_apply_editor_scripts()
