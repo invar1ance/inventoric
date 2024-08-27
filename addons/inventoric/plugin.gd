@@ -52,12 +52,14 @@ func _handles(object: Object) -> bool:
 func _apply_editor_scripts() -> void:
 	var scene = get_editor_interface().get_edited_scene_root()
 
+	# clear preview state
+	for canvas_item in _preview_canvas_items.values():
+		ICInventoryPreviewer.clear_canvas_item(canvas_item)
+
 	for view in _tracked_views:
 		for es in _editor_scripts:
 			if es is ICInventoryPreviewer and es.handles(view):
-				if _preview_canvas_items.has(view):
-					es.clear_canvas_item(_preview_canvas_items.get(view))
-				var canvas_item = es.create_canvas_item(view)
+				var canvas_item = ICInventoryPreviewer.create_canvas_item(view)
 				_preview_canvas_items[view] = canvas_item
 				es.draw(canvas_item, view)
 			if es is ICInventoryConfigurator and es.handles(view):
@@ -66,7 +68,7 @@ func _apply_editor_scripts() -> void:
 				es.resize(view)
 
 func _refresh_tracked_views() -> void:
-	var result = []
+	var result: Array[Node] = []
 	if get_editor_interface() != null and get_editor_interface().get_edited_scene_root() != null:
 		result = get_editor_interface().get_edited_scene_root().find_children("*", "ICInventoryView", true)
 		
