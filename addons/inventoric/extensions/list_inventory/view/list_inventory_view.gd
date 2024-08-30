@@ -1,16 +1,16 @@
-@icon("res://addons/inventoric/sprites/grid_inventory_view_icon.svg")
+@icon("res://addons/inventoric/sprites/list_inventory_view_icon.svg")
 @tool
-class_name ICGridInventoryView extends ICInventoryView
+class_name ICListInventoryView extends ICInventoryView
 
-@export var config: ICGridInventoryViewConfig:
+@export var config: ICListInventoryViewConfig:
 	set(v):
 		config = v
 		update_configuration_warnings()
-@export var slot_view_config: ICGridSlotViewConfig:
+@export var slot_view_config: ICListSlotViewConfig:
 	set(v):
 		slot_view_config = v
 		update_configuration_warnings()
-@export var inventory: ICGridInventory:
+@export var inventory: ICListInventory:
 	set(v):
 		inventory = v
 		update_configuration_warnings()
@@ -18,23 +18,23 @@ class_name ICGridInventoryView extends ICInventoryView
 func is_configured() -> bool:
 	return inventory != null and inventory.config != null and slot_view_config != null and config != null
 	
-func get_inventory() -> ICGridInventory:
+func get_inventory() -> ICListInventory:
 	return inventory
 	
-func get_nearest_slot(position: Vector2, free_only: bool) -> ICGridSlotView:
+func get_nearest_slot(position: Vector2, free_only: bool) -> ICListSlotView:
 	return super.get_nearest_slot(position, free_only)
 
-func add_slot_view(key: Vector2i) -> void:
-	var slot_view: ICGridSlotView = slot_view_config.slot_scene.instantiate()
+func add_slot_view(key: int) -> void:
+	var slot_view: ICListSlotView = slot_view_config.slot_scene.instantiate()
 	add_child(slot_view)
 	_slot_views.set_item(key, slot_view)
 	slot_view.init(self, key, make_item_view(inventory.get_item(key)))
 
-func make_item_view(item: ICItem) -> ICGridItemView:
+func make_item_view(item: ICItem) -> ICListItemView:
 	if item == null:
 		return null
 	
-	var item_view: ICGridItemView = slot_view_config.item_scene.instantiate()
+	var item_view: ICListItemView = slot_view_config.item_scene.instantiate()
 	item_view.init(item.get_config())
 
 	return item_view
@@ -44,32 +44,30 @@ func refresh_size() -> void:
 	size = inventory_size
 	custom_minimum_size = inventory_size
 	
-	for x in inventory.config.size_h:
-		for y in inventory.config.size_v:
-			var grid_pos: Vector2i = Vector2i(x, y)
-			var slot_view = _slot_views.get_item(grid_pos)
-			slot_view.refresh_size()
-			slot_view.global_position = calculate_slot_position(grid_pos)
-	
+	for idx in inventory.config.size:
+		var slot_view = _slot_views.get_item(idx)
+		slot_view.refresh_size()
+		slot_view.global_position = calculate_slot_position(idx)
+
 func calculate_size() -> Vector2:
 	if not is_configured():
 		return Vector2.ZERO
 	
 	var slot_size: Vector2 = Vector2(slot_view_config.size_h, slot_view_config.size_v)
-	var grid_size: Vector2 = Vector2(inventory.config.size_h, inventory.config.size_v)
-	var spacing: Vector2 = Vector2(config.spacing_h, config.spacing_v)
+	var inventory_size: int = inventory.config.size
+	var spacing: float = config.spacing
 	
-	return (slot_size * grid_size) + spacing * (grid_size - Vector2.ONE)
+	return Vector2(slot_size.x, (slot_size.y * inventory_size) + spacing * (inventory_size - 1))
 	
-func calculate_slot_position(inventory_key: Vector2i) -> Vector2:
+func calculate_slot_position(idx: int) -> Vector2:
 	if not is_configured():
 		return Vector2.ZERO
 	
-	var start_pos = get_global_rect().position
-	return start_pos + Vector2(slot_view_config.size_h * inventory_key.x, slot_view_config.size_v * inventory_key.y)
-	
+	var start_pos: Vector2 = get_global_rect().position
+	return Vector2(start_pos.x, start_pos.y + slot_view_config.size_v * idx)
+
 func _fill_slots() -> void:
-	_slot_views = ICGridCollection.new(inventory.get_item_collection().size())
+	_slot_views = ICListCollection.new(inventory.get_item_collection().size())
 	
 	for key in inventory.get_item_collection().keys():
 		add_slot_view(key)
@@ -81,11 +79,8 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	AutoloadManager.get_view_manager().inventory_deselected.emit(self)
-
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
 	
+func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	
@@ -93,21 +88,20 @@ func _ready() -> void:
 	
 	if not inventory.is_node_ready():
 		await inventory.ready
-	
 	_fill_slots()
-
-	inventory.item_added.connect(func(key: Vector2i, item: ICItem):
+#
+	inventory.item_added.connect(func(key: int, item: ICItem):
 		if AutoloadManager.get_view_manager().is_item_dragging():
 			return
 		
-		var slot_view: ICGridSlotView = _slot_views.get_item(key)
-		assert(slot_view != null, "SlotView is null on position: %d,%d" % [key.x, key.y])
+		var slot_view: ICListSlotView = _slot_views.get_item(key)
+		assert(slot_view != null, "SlotView is null on position: %d" % key)
 
-		var item_view: ICGridItemView = make_item_view(item)
+		var item_view: ICListItemView = make_item_view(item)
 		slot_view.set_item_view(item_view)
 	)
 	
-	inventory.item_removed.connect(func(key: Vector2i):
+	inventory.item_removed.connect(func(key: int):
 		if AutoloadManager.get_view_manager().is_item_dragging():
 			return
 			

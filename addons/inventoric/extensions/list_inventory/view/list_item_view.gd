@@ -1,4 +1,4 @@
-class_name ICGridItemView extends ICItemView
+class_name ICListItemView extends ICItemView
 
 @onready var icon_sprite: TextureRect = $Icon
 
@@ -9,7 +9,4 @@ var icon: Texture2D:
 
 func init(config: ICItemConfig) -> void:
 	super.init(config)
-	
-	if not is_node_ready():
-		await ready
 	icon = config.icon

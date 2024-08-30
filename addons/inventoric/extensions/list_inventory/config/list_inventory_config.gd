@@ -1,8 +1,7 @@
-class_name ICGridInventoryConfig extends Resource
+class_name ICListInventoryConfig extends Resource
 
 @export_group("Sizing")
-@export_range(1, 1000, 1) var size_h: int = 5
-@export_range(1, 1000, 1) var size_v: int = 5
+@export_range(1, 1000, 1) var size: int = 10
 
 @export_group("Sorting and Filtering")
 @export var continuous_order: bool = true

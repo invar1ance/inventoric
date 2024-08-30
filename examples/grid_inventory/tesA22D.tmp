@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://ct8atagvq0g13"]
+
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/grid_inventory.gd" id="1_0uhc8"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/config/grid_inventory_config.gd" id="2_krxi2"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/view/grid_inventory_view.gd" id="3_q6un4"]
+[ext_resource type="Script" path="res://examples/grid_inventory/item_spawner.gd" id="12_oaktp"]
+[ext_resource type="Resource" uid="uid://w1qshuw2crwv" path="res://examples/grid_inventory/test_item.tres" id="13_q6klm"]
+
+[sub_resource type="Resource" id="Resource_cmhg6"]
+script = ExtResource("2_krxi2")
+size_h = 5
+size_v = 5
+continuous_order = true
+allow_item_swap = true
+drag_and_drop_enabled = true
+
+[sub_resource type="Resource" id="Resource_v7cw0"]
+script = ExtResource("2_krxi2")
+size_h = 3
+size_v = 5
+continuous_order = true
+allow_item_swap = true
+drag_and_drop_enabled = true
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridInventory" type="Node" parent="."]
+script = ExtResource("1_0uhc8")
+config = SubResource("Resource_cmhg6")
+
+[node name="GridInventory2" type="Node" parent="."]
+script = ExtResource("1_0uhc8")
+config = SubResource("Resource_v7cw0")
+
+[node name="GridInventoryView" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 63.0
+offset_top = 31.0
+offset_right = 63.0
+offset_bottom = 31.0
+script = ExtResource("3_q6un4")
+
+[node name="GridInventoryView2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 447.0
+offset_top = 26.0
+offset_right = 447.0
+offset_bottom = 26.0
+script = ExtResource("3_q6un4")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 362.0
+offset_right = 647.0
+offset_bottom = 419.0
+text = "Spawn Item"
+
+[node name="ItemSpawner" type="Node" parent="." node_paths=PackedStringArray("button", "inventory")]
+script = ExtResource("12_oaktp")
+button = NodePath("../Button")
+inventory = NodePath("../GridInventory")
+item = ExtResource("13_q6klm")

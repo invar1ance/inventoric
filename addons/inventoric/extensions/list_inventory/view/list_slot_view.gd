@@ -1,8 +1,8 @@
-class_name ICGridSlotView extends ICSlotView
+class_name ICListSlotView extends ICSlotView
 
 @onready var panel: Panel = $Panel
 
-func init(inventory_view: ICGridInventoryView, inventory_key: Vector2i, item_view: ICGridItemView) -> void:
+func init(inventory_view: ICListInventoryView, inventory_key: int, item_view: ICListItemView) -> void:
 	super.init(inventory_view, inventory_key, item_view)
 	
 	panel.add_theme_stylebox_override("panel", get_inventory_view().slot_view_config.default_style)
@@ -10,33 +10,29 @@ func init(inventory_view: ICGridInventoryView, inventory_key: Vector2i, item_vie
 	flow.entered.connect(func(to: ICSlotView.State) -> void:
 		match to:
 			ICSlotView.State.Default:
-				panel.add_theme_stylebox_override("panel", get_inventory_view().slot_view_config.default_style)
-				if get_item_view() != null:
-					get_item_view().z_index = 0
+				panel.add_theme_stylebox_override("panel", _inventory_view.slot_view_config.default_style)
+				z_index = 0
 			ICSlotView.State.Highlight:
-				panel.add_theme_stylebox_override("panel", get_inventory_view().slot_view_config.selected_style)
-				if get_item_view() != null:
-					get_item_view().z_index = 0
+				panel.add_theme_stylebox_override("panel", _inventory_view.slot_view_config.selected_style)
+				z_index = 0
 			ICSlotView.State.DragFrom:
-				panel.add_theme_stylebox_override("panel", get_inventory_view().slot_view_config.drag_from_style)
-				if get_item_view() != null:
-					get_item_view().z_index = get_inventory_view().config.dragging_item_z_index
+				panel.add_theme_stylebox_override("panel", _inventory_view.slot_view_config.drag_from_style)
+				z_index = _inventory_view.config.dragging_item_z_index
 			ICSlotView.State.DragTo:
-				panel.add_theme_stylebox_override("panel", get_inventory_view().slot_view_config.drag_to_style)
-				if get_item_view() != null:
-					get_item_view().z_index = 0
+				panel.add_theme_stylebox_override("panel", _inventory_view.slot_view_config.drag_to_style)
+				z_index = 0
 	)
 
-func get_inventory_view() -> ICGridInventoryView:
+func get_inventory_view() -> ICListInventoryView:
 	return super.get_inventory_view()
 
-func get_inventory_key() -> Vector2i:
+func get_inventory_key() -> int:
 	return super.get_inventory_key()
 
-func get_item_view() -> ICGridItemView:
+func get_item_view() -> ICListItemView:
 	return super.get_item_view()
 	
-func set_item_view(item_view: ICGridItemView) -> void:
+func set_item_view(item_view: ICListItemView) -> void:
 	super.set_item_view(item_view)
 
 func refresh_size() -> void:
