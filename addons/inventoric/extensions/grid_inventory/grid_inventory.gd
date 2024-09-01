@@ -6,11 +6,7 @@ signal item_removed(slot: Vector2i)
 
 @export var config: ICGridInventoryConfig
 
-var _item_collection: ICGridCollection:
-	set(v):
-		_item_collection = v
-		initialized.emit(v)
-		is_initialized = true
+var _item_collection: ICGridCollection
 
 func add_item(slot: Vector2i, item: ICItemConfig) -> void:
 	assert(_item_collection.get_item(slot) == null, "This item slot not empty.")

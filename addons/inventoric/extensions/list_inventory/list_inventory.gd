@@ -8,11 +8,7 @@ signal item_moving(slot: int, item: ICItem)
 
 @export var config: ICListInventoryConfig
 
-var _item_collection: ICListCollection:
-	set(v):
-		_item_collection = v
-		initialized.emit(v)
-		is_initialized = true
+var _item_collection: ICListCollection
 
 func add_item(slot: int, item: ICItemConfig) -> void:
 	assert(_item_collection.get_item(slot) == null, "This item slot not empty.")
