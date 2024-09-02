@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-var _tracked_views: Array
+var _tracked_views: Array[ICInventoryView]
 
 func _enter_tree():
 	add_autoload_singleton("Inventoric", "res://addons/inventoric/core/inventory_view_manager.gd")
@@ -55,7 +55,7 @@ func _refresh_tracked_views() -> void:
 		result_views.append_array(current_scene.find_children("*", "ICInventoryView", true))
 	
 	_tracked_views.clear()
-	for result_view in result_views:
+	for result_view: ICInventoryView in result_views:
 		_tracked_views.append(result_view)
 				
 func _recalculate_inventory_size(view: ICInventoryView) -> void:

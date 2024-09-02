@@ -78,13 +78,19 @@ func _process_drop() -> void:
 			
 			## todo convertation from one inventory type to another
 			var drag_from_item: ICItem = drag_from_slot.get_inventory_view().get_inventory().get_item(drag_from_slot.get_inventory_key())
-			var drag_from_item_config = drag_from_item.get_config() if drag_from_item != null else null
+			var drag_from_item_config: ICItemConfig = drag_from_item.get_config() if drag_from_item != null else null
+			var drag_from_inventory: ICInventory = drag_from_slot.get_inventory_view().get_inventory()
 			var drag_to_item: ICItem = highlight_slot.get_inventory_view().get_inventory().get_item(highlight_slot.get_inventory_key())
 			var drag_to_item_config = drag_to_item.get_config() if drag_to_item != null else null
-			drag_from_slot.get_inventory_view().get_inventory().remove_item(drag_from_slot.get_inventory_key())
-			drag_from_slot.get_inventory_view().get_inventory().add_item(drag_from_slot.get_inventory_key(), drag_from_item_config)
-			highlight_slot.get_inventory_view().get_inventory().remove_item(highlight_slot.get_inventory_key())
-			highlight_slot.get_inventory_view().get_inventory().add_item(highlight_slot.get_inventory_key(), drag_from_item_config)
+			var drag_to_inventory: ICInventory = highlight_slot.get_inventory_view().get_inventory()
+			
+			if drag_from_inventory == drag_to_inventory:
+				drag_from_inventory.swap_items(drag_from_slot.get_inventory_key(), highlight_slot.get_inventory_key())
+			else:
+				drag_from_slot.get_inventory_view().get_inventory().remove_item(drag_from_slot.get_inventory_key())
+				drag_from_slot.get_inventory_view().get_inventory().add_item(drag_from_slot.get_inventory_key(), drag_from_item_config)
+				highlight_slot.get_inventory_view().get_inventory().remove_item(highlight_slot.get_inventory_key())
+				highlight_slot.get_inventory_view().get_inventory().add_item(highlight_slot.get_inventory_key(), drag_from_item_config)
 			
 			highlight_slot.flow.apply(ICSlotView.State.Default)
 			highlight_slot = null

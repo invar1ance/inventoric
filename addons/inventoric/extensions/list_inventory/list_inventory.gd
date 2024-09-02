@@ -1,10 +1,9 @@
 @icon("res://addons/inventoric/sprites/list_inventory_icon.svg")
 class_name ICListInventory extends ICInventory
 
-signal item_added(slot: int, item: ICItem)
-signal item_removed(slot: int)
-signal item_selected(slot: int, item: ICItem)
-signal item_moving(slot: int, item: ICItem)
+signal item_added(to: int, item: ICItem)
+signal item_removed(from: int)
+signal item_moved(from: int, to: int, item: ICItem)
 
 @export var config: ICListInventoryConfig
 
@@ -12,6 +11,7 @@ var _item_collection: ICListCollection
 
 func add_item(slot: int, item: ICItemConfig) -> void:
 	assert(_item_collection.get_item(slot) == null, "This item slot not empty.")
+	assert(item != null, "Item config required")
 	var item_instance = ICItem.new(item)
 	_item_collection.set_item(slot, item_instance)
 	item_added.emit(slot, item)

@@ -5,15 +5,15 @@ class_name ICInventory extends Node
 signal inventory_filled ## Emitted when the inventory becomes full.
 
 ## Adds an [param item] to the specified [param slot] in the inventory.
-func add_item(slot, item: ICItemConfig) -> void:
+func add_item(to, item: ICItemConfig) -> void:
 	pass
 
 ## Retrieves the item from the specified [param slot] in the inventory.
-func get_item(slot) -> ICItem:
+func get_item(from) -> ICItem:
 	return null
 
 ## Removes the item from the specified [param slot] in the inventory.
-func remove_item(slot) -> void:
+func remove_item(from) -> void:
 	pass
 
 ## Swaps the [param from] and [param to] items between two specified slots in the inventory.
