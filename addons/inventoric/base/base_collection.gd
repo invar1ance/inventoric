@@ -6,6 +6,27 @@ class_name ICBaseCollection
 ## Collection of items
 var _items: Array 
 
+## Iterator current index
+var _current: int
+
+## Iterator init
+func _iter_init(arg):
+	_current = 0
+	
+	return _current < _items.size()
+
+## Iterator method
+func _iter_next(arg):
+	_current += 1
+	
+	return _current < _items.size()
+
+## Iterator method
+func _iter_get(arg):
+	if arg != null:
+		print(arg)
+	return _items[_current]
+
 ## Initializes the collection with a specified [param size].
 func _init(size: int) -> void:
 	_items = []
@@ -56,10 +77,6 @@ func is_empty() -> bool:
 ## Returns [code]true[/code] if the collection is full (not contains [code]null[/code] values), otherwise [code]false[/code].
 func is_full() -> bool:
 	return not _items.has(null)
-
-## Returns an array containing all the [b]values[/b] in the collection.
-func values() -> Array:
-	return _items
 	
 ## Returns an [Array] containing all the [b]keys[/b] in the collection.
 func keys() -> Array:

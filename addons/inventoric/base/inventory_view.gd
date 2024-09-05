@@ -12,7 +12,7 @@ func get_nearest_slot(position: Vector2, free_only: bool) -> ICSlotView:
 	var near_distance: float = 99999
 	var nearest_slot: ICSlotView = null
 	
-	for slot: ICSlotView in _slot_views.values():
+	for slot: ICSlotView in _slot_views:
 		var slot_pos: Vector2 = slot.get_global_rect().get_center()
 		var distance: float = slot_pos.distance_squared_to(position)
 		

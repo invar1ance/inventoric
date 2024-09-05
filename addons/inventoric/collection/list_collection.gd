@@ -35,10 +35,6 @@ func is_empty() -> bool:
 func is_full() -> bool:
 	return super.is_full()
 
-## Returns an [Array] containing all the [b]values[/b] in the collection.
-func values() -> Array:
-	return super.values()
-
 ## Returns an [Array] containing all the (list position) [b]keys[/b] in the collection.
 func keys() -> Array[int]:
 	return super.keys()
