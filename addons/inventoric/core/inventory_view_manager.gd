@@ -1,4 +1,9 @@
-class_name InventoryViewManager extends Node
+extends Node
+
+const ICInventory = preload("res://addons/inventoric/base/inventory.gd")
+const ICInventoryView = preload("res://addons/inventoric/base/inventory_view.gd")
+const ICSlotView = preload("res://addons/inventoric/base/slot_view.gd")
+const ICItemView = preload("res://addons/inventoric/base/item_view.gd")
 
 const NULL_IDX: int = -1
 

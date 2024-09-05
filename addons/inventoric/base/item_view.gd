@@ -1,4 +1,4 @@
-class_name ICItemView extends Control
+extends Control
 
 var _config: ICItemConfig
 

@@ -1,4 +1,9 @@
-class_name ICInventoryView extends Control
+extends Control
+
+const ICBaseCollection = preload("res://addons/inventoric/base/base_collection.gd")
+const ICInventory = preload("res://addons/inventoric/base/inventory.gd")
+const ICSlotView = preload("res://addons/inventoric/base/slot_view.gd")
+const ICItemView = preload("res://addons/inventoric/base/item_view.gd")
 
 var _slot_views: ICBaseCollection
 

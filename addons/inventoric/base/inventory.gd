@@ -1,4 +1,6 @@
-class_name ICInventory extends Node
+extends Node
+
+const ICBaseCollection = preload("res://addons/inventoric/base/base_collection.gd")
 
 ## This class represents an inventory system, managing a collection of items within slots.
 

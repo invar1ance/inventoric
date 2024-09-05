@@ -1,6 +1,8 @@
 @tool
 extends EditorPlugin
 
+const ICInventoryView = preload("res://addons/inventoric/base/inventory_view.gd")
+
 var _tracked_views: Array[ICInventoryView]
 
 func _enter_tree():
@@ -52,7 +54,10 @@ func _refresh_tracked_views() -> void:
 	var current_scene = get_editor_interface().get_edited_scene_root()
 	var result_views: Array[Node] = []
 	if get_editor_interface() != null and current_scene != null:
-		result_views.append_array(current_scene.find_children("*", "ICInventoryView", true))
+		var scene_controls = current_scene.find_children("*", "Control", true)
+		for scene_control in scene_controls:
+			if scene_control is ICInventoryView:
+				result_views.append(scene_control)
 	
 	_tracked_views.clear()
 	for result_view: ICInventoryView in result_views:

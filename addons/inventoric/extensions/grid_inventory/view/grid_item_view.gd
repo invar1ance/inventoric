@@ -1,4 +1,4 @@
-class_name ICGridItemView extends ICItemView
+class_name ICGridItemView extends "res://addons/inventoric/base/item_view.gd"
 
 @onready var icon_sprite: TextureRect = $Icon
 

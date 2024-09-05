@@ -1,4 +1,7 @@
-class_name ICSlotView extends Control
+extends Control
+
+const ICInventoryView = preload("res://addons/inventoric/base/inventory_view.gd")
+const ICItemView = preload("res://addons/inventoric/base/item_view.gd")
 
 enum State {
 	Default,

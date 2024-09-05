@@ -1,4 +1,4 @@
-class_name ICGridCollection extends ICBaseCollection
+class_name ICGridCollection extends "res://addons/inventoric/base/base_collection.gd"
 
 ## A collection class that manages items in a 2D grid layout.
 ## Extends ICBaseCollection to support conversion between 2D grid positions and 1D indices.

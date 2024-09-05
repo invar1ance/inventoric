@@ -1,5 +1,3 @@
-class_name ICBaseCollection
-
 ## A base class for managing a collection of items, providing functionality to add, 
 ## retrieve, and check items within a fixed-size array.
 

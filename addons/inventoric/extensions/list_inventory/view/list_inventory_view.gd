@@ -1,6 +1,8 @@
 @icon("res://addons/inventoric/sprites/list_inventory_view_icon.svg")
 @tool
-class_name ICListInventoryView extends ICInventoryView
+class_name ICListInventoryView extends "res://addons/inventoric/base/inventory_view.gd"
+
+const AutoloadManager = preload("res://addons/inventoric/core/autoload_manager.gd")
 
 @export var config: ICListInventoryViewConfig:
 	set(v):

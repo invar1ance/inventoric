@@ -1,5 +1,4 @@
-@tool
-class_name AutoloadManager
+const InventoryViewManager = preload("res://addons/inventoric/core/inventory_view_manager.gd")
 
 static func get_view_manager() -> InventoryViewManager:
 	if Engine.is_editor_hint():

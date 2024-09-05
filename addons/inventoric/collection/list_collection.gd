@@ -1,4 +1,4 @@
-class_name ICListCollection extends ICBaseCollection
+class_name ICListCollection extends "res://addons/inventoric/base/base_collection.gd"
 
 ## A collection class that manages items in a list layout.
 ## Extends ICBaseCollection to support index typization.

@@ -1,6 +1,8 @@
 @icon("res://addons/inventoric/sprites/grid_inventory_view_icon.svg")
 @tool
-class_name ICGridInventoryView extends ICInventoryView
+class_name ICGridInventoryView extends "res://addons/inventoric/base/inventory_view.gd"
+
+const AutoloadManager = preload("res://addons/inventoric/core/autoload_manager.gd")
 
 @export var config: ICGridInventoryViewConfig:
 	set(v):
@@ -111,7 +113,7 @@ func _ready() -> void:
 		if AutoloadManager.get_view_manager().is_item_dragging():
 			return
 			
-		var slot_view: ICListSlotView = _slot_views.get_item(key)
+		var slot_view: ICGridSlotView = _slot_views.get_item(key)
 		if slot_view != null:
 			slot_view.clear_item_view()
 	)

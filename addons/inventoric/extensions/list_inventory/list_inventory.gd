@@ -1,5 +1,5 @@
 @icon("res://addons/inventoric/sprites/list_inventory_icon.svg")
-class_name ICListInventory extends ICInventory
+class_name ICListInventory extends "res://addons/inventoric/base/inventory.gd"
 
 signal item_added(to: int, item: ICItem)
 signal item_removed(from: int)
