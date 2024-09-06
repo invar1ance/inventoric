@@ -78,7 +78,7 @@ func is_full() -> bool:
 	
 ## Returns an [Array] containing all the [b]keys[/b] in the collection.
 func keys() -> Array:
-	return range(0, _items.size)
+	return range(0, _items.size())
 
 ## Returns the [b]size[/b] of the collection.
 func size() -> Variant:

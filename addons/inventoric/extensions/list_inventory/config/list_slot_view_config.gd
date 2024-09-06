@@ -1,7 +1,7 @@
 class_name ICListSlotViewConfig extends Resource
 
 @export_group("Configuration")
-@export var slot_scene: PackedScene = preload("res://addons/inventoric/default/scene/default_slot.tscn")
+@export var slot_scene: PackedScene = preload("res://addons/inventoric/default/scene/default_list_slot.tscn")
 @export var item_scene: PackedScene = preload("res://addons/inventoric/default/scene/default_list_item.tscn")
 
 @export_group("Sizing")
@@ -9,6 +9,7 @@ class_name ICListSlotViewConfig extends Resource
 @export_range(1, 1000, 1) var size_v: float = 64
 @export_range(0, 1000, 1) var padding_h: float = 8
 @export_range(0, 1000, 1) var padding_v: float = 8
+@export_range(0, 1000, 1) var icon_width: float = 48
 
 @export_group("Styles")
 @export var default_style: StyleBox = preload("res://addons/inventoric/default/style/default_slot_style.tres")

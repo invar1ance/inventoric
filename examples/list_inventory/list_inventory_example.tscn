@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xrtsrm6l2jkh"]
+[gd_scene load_steps=20 format=3 uid="uid://xrtsrm6l2jkh"]
 
 [ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/list_inventory.gd" id="1_tum1v"]
 [ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/config/list_inventory_config.gd" id="2_lhkd7"]
@@ -9,8 +9,10 @@
 [ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/config/list_slot_view_config.gd" id="6_bu6ad"]
 [ext_resource type="StyleBox" uid="uid://bf1l1rdmi5lku" path="res://addons/inventoric/default/style/default_slot_drag_from_style.tres" id="6_you0o"]
 [ext_resource type="StyleBox" uid="uid://ujj167hx31cp" path="res://addons/inventoric/default/style/default_slot_drag_to_style.tres" id="7_jq1a2"]
-[ext_resource type="PackedScene" uid="uid://bxwcmn7i2qoif" path="res://addons/inventoric/default/scene/default_slot.tscn" id="7_p36x5"]
 [ext_resource type="StyleBox" uid="uid://cod3wwb4qhqq5" path="res://addons/inventoric/default/style/default_slot_selected_style.tres" id="10_y1vgn"]
+[ext_resource type="PackedScene" uid="uid://u8gu04glue8h" path="res://addons/inventoric/default/scene/default_list_slot.tscn" id="11_rrphp"]
+[ext_resource type="Script" path="res://examples/list_inventory/list_inventory_spawner.gd" id="12_anvpr"]
+[ext_resource type="Resource" uid="uid://w1qshuw2crwv" path="res://examples/example_item.tres" id="13_oe8qb"]
 
 [sub_resource type="Resource" id="Resource_6elud"]
 script = ExtResource("2_lhkd7")
@@ -27,12 +29,40 @@ smooth_placement = true
 
 [sub_resource type="Resource" id="Resource_qpn3g"]
 script = ExtResource("6_bu6ad")
-slot_scene = ExtResource("7_p36x5")
+slot_scene = ExtResource("11_rrphp")
 item_scene = ExtResource("5_0s0kq")
 size_h = 256.0
 size_v = 64.0
 padding_h = 8.0
 padding_v = 8.0
+icon_width = 48.0
+default_style = ExtResource("5_kicg1")
+selected_style = ExtResource("10_y1vgn")
+drag_from_style = ExtResource("6_you0o")
+drag_to_style = ExtResource("7_jq1a2")
+
+[sub_resource type="Resource" id="Resource_1rkdo"]
+script = ExtResource("2_lhkd7")
+size = 4
+continuous_order = true
+allow_item_swap = true
+drag_and_drop_enabled = true
+
+[sub_resource type="Resource" id="Resource_x1xrj"]
+script = ExtResource("4_vjryy")
+spacing = 0.0
+dragging_item_z_index = 10
+smooth_placement = true
+
+[sub_resource type="Resource" id="Resource_actp0"]
+script = ExtResource("6_bu6ad")
+slot_scene = ExtResource("11_rrphp")
+item_scene = ExtResource("5_0s0kq")
+size_h = 256.0
+size_v = 64.0
+padding_h = 8.0
+padding_v = 8.0
+icon_width = 48.0
 default_style = ExtResource("5_kicg1")
 selected_style = ExtResource("10_y1vgn")
 drag_from_style = ExtResource("6_you0o")
@@ -59,3 +89,35 @@ script = ExtResource("3_5gadv")
 config = SubResource("Resource_15acc")
 slot_view_config = SubResource("Resource_qpn3g")
 inventory = NodePath("../ICListInventory")
+
+[node name="ICListInventory2" type="Node" parent="."]
+script = ExtResource("1_tum1v")
+config = SubResource("Resource_1rkdo")
+
+[node name="ICListInventoryView2" type="Control" parent="." node_paths=PackedStringArray("inventory")]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 406.0
+offset_top = 24.0
+offset_right = 662.0
+offset_bottom = 280.0
+script = ExtResource("3_5gadv")
+config = SubResource("Resource_x1xrj")
+slot_view_config = SubResource("Resource_actp0")
+inventory = NodePath("../ICListInventory2")
+
+[node name="SpawnButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 362.0
+offset_right = 647.0
+offset_bottom = 419.0
+text = "Spawn Item"
+
+[node name="ListInventorySpawner" type="Node" parent="." node_paths=PackedStringArray("button", "inventory1", "inventory2")]
+script = ExtResource("12_anvpr")
+button = NodePath("../SpawnButton")
+inventory1 = NodePath("../ICListInventory")
+inventory2 = NodePath("../ICListInventory2")
+item = ExtResource("13_oe8qb")

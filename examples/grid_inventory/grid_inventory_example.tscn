@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b6u763jmm1l36" path="res://addons/inventoric/default/scene/default_grid_item.tscn" id="8_5q8pu"]
 [ext_resource type="Script" path="res://addons/inventoric/extensions/grid_inventory/config/grid_slot_view_config.gd" id="9_bg2f7"]
 [ext_resource type="StyleBox" uid="uid://cod3wwb4qhqq5" path="res://addons/inventoric/default/style/default_slot_selected_style.tres" id="10_52k47"]
-[ext_resource type="PackedScene" uid="uid://bxwcmn7i2qoif" path="res://addons/inventoric/default/scene/default_slot.tscn" id="11_0ft74"]
+[ext_resource type="PackedScene" uid="uid://bxwcmn7i2qoif" path="res://addons/inventoric/default/scene/default_grid_slot.tscn" id="11_0ft74"]
 [ext_resource type="Script" path="res://examples/grid_inventory/grid_inventory_spawner.gd" id="12_ct4t5"]
 [ext_resource type="Resource" uid="uid://w1qshuw2crwv" path="res://examples/example_item.tres" id="13_3ewxa"]
 
@@ -70,7 +70,7 @@ selected_style = ExtResource("10_52k47")
 drag_from_style = ExtResource("6_82blk")
 drag_to_style = ExtResource("7_mumya")
 
-[node name="Test" type="Control"]
+[node name="GridInventoryExample" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,7 +111,7 @@ config = SubResource("Resource_0m38m")
 slot_view_config = SubResource("Resource_hj8fo")
 inventory = NodePath("../GridInventory2")
 
-[node name="Button" type="Button" parent="."]
+[node name="SpawnButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 362.0
@@ -119,9 +119,9 @@ offset_right = 647.0
 offset_bottom = 419.0
 text = "Spawn Item"
 
-[node name="Test" type="Node" parent="." node_paths=PackedStringArray("button", "inventory1", "inventory2")]
+[node name="GridInventorySpawner" type="Node" parent="." node_paths=PackedStringArray("button", "inventory1", "inventory2")]
 script = ExtResource("12_ct4t5")
-item = ExtResource("13_3ewxa")
-button = NodePath("../Button")
+button = NodePath("../SpawnButton")
 inventory1 = NodePath("../GridInventory")
 inventory2 = NodePath("../GridInventory2")
+item = ExtResource("13_3ewxa")

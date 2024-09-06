@@ -36,7 +36,7 @@ func is_full() -> bool:
 	return super.is_full()
 
 ## Returns an [Array] containing all the (list position) [b]keys[/b] in the collection.
-func keys() -> Array[int]:
+func keys() -> Array:
 	return super.keys()
 
 ## Returns the [b]size[/b] of the collection.

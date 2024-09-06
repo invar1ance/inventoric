@@ -14,7 +14,7 @@ func add_item(slot: int, item: ICItemConfig) -> void:
 	assert(item != null, "Item config required")
 	var item_instance = ICItem.new(item)
 	_item_collection.set_item(slot, item_instance)
-	item_added.emit(slot, item)
+	item_added.emit(slot, item_instance)
 
 func get_item(slot: int) -> ICItem:
 	return _item_collection.get_item(slot)
@@ -29,8 +29,12 @@ func swap_items(from: int, to: int) -> void:
 	
 	var from_item = _item_collection.get_item(from)
 	var to_item = _item_collection.get_item(to)
-	_item_collection.set_element(to, from_item)
-	_item_collection.set_element(from, to_item)
+	_item_collection.set_item(to, from_item)
+	if from_item != null:
+		item_moved.emit(from, to, from_item)
+	_item_collection.set_item(from, to_item)
+	if to_item != null:
+		item_moved.emit(to, from, to_item)
 	
 func get_item_collection() -> ICListCollection:
 	return _item_collection

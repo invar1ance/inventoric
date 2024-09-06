@@ -1,7 +1,7 @@
 class_name ICGridSlotViewConfig extends Resource
 
 @export_group("Configuration")
-@export var slot_scene: PackedScene = preload("res://addons/inventoric/default/scene/default_slot.tscn")
+@export var slot_scene: PackedScene = preload("res://addons/inventoric/default/scene/default_grid_slot.tscn")
 @export var item_scene: PackedScene = preload("res://addons/inventoric/default/scene/default_grid_item.tscn")
 
 @export_group("Sizing")

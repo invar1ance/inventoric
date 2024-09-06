@@ -1,9 +1,38 @@
-[gd_scene format=3 uid="uid://ydjvkcmg8oq0"]
+[gd_scene load_steps=3 format=3 uid="uid://ydjvkcmg8oq0"]
 
-[node name="ListItem" type="Control"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/view/list_item_view.gd" id="1_fui4r"]
+[ext_resource type="Texture2D" uid="uid://o8n3wcslhxkr" path="res://icon.svg" id="1_poyu4"]
+
+[node name="DefaultListItem" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fui4r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_poyu4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Test text"
+vertical_alignment = 1

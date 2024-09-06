@@ -1,12 +1,19 @@
 class_name ICListItemView extends "res://addons/inventoric/core/base/item_view.gd"
 
-@onready var icon_sprite: TextureRect = $Icon
-
-var icon: Texture2D:
+var item_icon: Texture2D:
 	set(v):
-		icon = v
-		icon_sprite.texture = v
+		item_icon = v
+		$HBoxContainer/Icon.texture = v
+		
+var item_name: String:
+	set(v):
+		item_name = v
+		$HBoxContainer/Name.text = v
 
 func init(config: ICItemConfig) -> void:
 	super.init(config)
-	icon = config.icon
+	if not is_node_ready():
+		await ready
+	
+	item_icon = config.icon
+	item_name = config.name
