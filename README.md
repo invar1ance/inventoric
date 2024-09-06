@@ -5,7 +5,7 @@ This plugin is built on two core principles: ease of use and extensibility for a
 - [x] Core architecture
 - [x] Inventory view auto-resizing in editor
 - [x] Grid inventory
-- [ ] List inventory
+- [x] List inventory
 - [ ] Dashboard inventory
 - [ ] Conversional item views
 - [ ] Filtering and sorting items
