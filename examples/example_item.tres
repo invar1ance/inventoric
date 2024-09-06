@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ICItemConfig" load_steps=3 format=3 uid="uid://w1qshuw2crwv"]
 
-[ext_resource type="Script" path="res://addons/inventoric/base/item_config.gd" id="1_jear7"]
+[ext_resource type="Script" path="res://addons/inventoric/core/base/item_config.gd" id="1_jear7"]
 [ext_resource type="Texture2D" uid="uid://o8n3wcslhxkr" path="res://icon.svg" id="1_o0u0f"]
 
 [resource]

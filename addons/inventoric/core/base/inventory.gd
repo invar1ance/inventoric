@@ -1,6 +1,6 @@
 extends Node
 
-const ICBaseCollection = preload("res://addons/inventoric/base/base_collection.gd")
+const ICCollection = preload("res://addons/inventoric/core/base/collection.gd")
 
 ## This class represents an inventory system, managing a collection of items within slots.
 
@@ -24,5 +24,5 @@ func swap_items(from, to) -> void:
 
 ## Retrieves the item collection associated with the inventory. [br]
 ## [u]Modify the collection manually at your own risk! It is recommended to use the collection only for data retrieval.[/u]
-func get_item_collection() -> ICBaseCollection:
+func get_item_collection() -> ICCollection:
 	return null

@@ -2,12 +2,15 @@
 This plugin is built on two core principles: ease of use and extensibility for any requirements.
 
 **Roadmap:**
-- ~~Core architecture~~
-- ~~Inventory preview in editor~~
-- ~~Grid inventory (with example)~~
-- Functionality for saving systems
-- More inventory extensions (types)
-- Documentation
+- [x] Core architecture
+- [x] Inventory view auto-resizing in editor
+- [x] Grid inventory
+- [ ] List inventory
+- [ ] Dashboard inventory
+- [ ] Conversional item views
+- [ ] Filtering and sorting items
+- [ ] Inventory resizing (slots count)
+- [ ] Documentation
 
 Watch example in `examples` dir.
 

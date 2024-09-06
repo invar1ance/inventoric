@@ -1,6 +1,6 @@
 @icon("res://addons/inventoric/sprites/list_inventory_view_icon.svg")
 @tool
-class_name ICListInventoryView extends "res://addons/inventoric/base/inventory_view.gd"
+class_name ICListInventoryView extends "res://addons/inventoric/core/base/inventory_view.gd"
 
 const AutoloadManager = preload("res://addons/inventoric/core/autoload_manager.gd")
 
@@ -83,6 +83,9 @@ func _on_mouse_exited() -> void:
 	AutoloadManager.get_view_manager().inventory_deselected.emit(self)
 	
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	

@@ -1,0 +1,61 @@
+[gd_scene load_steps=15 format=3 uid="uid://xrtsrm6l2jkh"]
+
+[ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/list_inventory.gd" id="1_tum1v"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/config/list_inventory_config.gd" id="2_lhkd7"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/view/list_inventory_view.gd" id="3_5gadv"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/config/list_inventory_view_config.gd" id="4_vjryy"]
+[ext_resource type="PackedScene" uid="uid://ydjvkcmg8oq0" path="res://addons/inventoric/default/scene/default_list_item.tscn" id="5_0s0kq"]
+[ext_resource type="StyleBox" uid="uid://cb4mf3bybwvtm" path="res://addons/inventoric/default/style/default_slot_style.tres" id="5_kicg1"]
+[ext_resource type="Script" path="res://addons/inventoric/extensions/list_inventory/config/list_slot_view_config.gd" id="6_bu6ad"]
+[ext_resource type="StyleBox" uid="uid://bf1l1rdmi5lku" path="res://addons/inventoric/default/style/default_slot_drag_from_style.tres" id="6_you0o"]
+[ext_resource type="StyleBox" uid="uid://ujj167hx31cp" path="res://addons/inventoric/default/style/default_slot_drag_to_style.tres" id="7_jq1a2"]
+[ext_resource type="PackedScene" uid="uid://bxwcmn7i2qoif" path="res://addons/inventoric/default/scene/default_slot.tscn" id="7_p36x5"]
+[ext_resource type="StyleBox" uid="uid://cod3wwb4qhqq5" path="res://addons/inventoric/default/style/default_slot_selected_style.tres" id="10_y1vgn"]
+
+[sub_resource type="Resource" id="Resource_6elud"]
+script = ExtResource("2_lhkd7")
+size = 10
+continuous_order = true
+allow_item_swap = true
+drag_and_drop_enabled = true
+
+[sub_resource type="Resource" id="Resource_15acc"]
+script = ExtResource("4_vjryy")
+spacing = 0.0
+dragging_item_z_index = 10
+smooth_placement = true
+
+[sub_resource type="Resource" id="Resource_qpn3g"]
+script = ExtResource("6_bu6ad")
+slot_scene = ExtResource("7_p36x5")
+item_scene = ExtResource("5_0s0kq")
+size_h = 256.0
+size_v = 64.0
+padding_h = 8.0
+padding_v = 8.0
+default_style = ExtResource("5_kicg1")
+selected_style = ExtResource("10_y1vgn")
+drag_from_style = ExtResource("6_you0o")
+drag_to_style = ExtResource("7_jq1a2")
+
+[node name="ListInventoryExample" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ICListInventory" type="Node" parent="."]
+script = ExtResource("1_tum1v")
+config = SubResource("Resource_6elud")
+
+[node name="ICListInventoryView" type="Control" parent="." node_paths=PackedStringArray("inventory")]
+custom_minimum_size = Vector2(256, 640)
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 640.0
+script = ExtResource("3_5gadv")
+config = SubResource("Resource_15acc")
+slot_view_config = SubResource("Resource_qpn3g")
+inventory = NodePath("../ICListInventory")

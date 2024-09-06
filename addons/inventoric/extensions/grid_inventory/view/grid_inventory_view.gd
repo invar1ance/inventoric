@@ -1,6 +1,6 @@
 @icon("res://addons/inventoric/sprites/grid_inventory_view_icon.svg")
 @tool
-class_name ICGridInventoryView extends "res://addons/inventoric/base/inventory_view.gd"
+class_name ICGridInventoryView extends "res://addons/inventoric/core/base/inventory_view.gd"
 
 const AutoloadManager = preload("res://addons/inventoric/core/autoload_manager.gd")
 

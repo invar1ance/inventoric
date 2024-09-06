@@ -1,6 +1,6 @@
-class_name ICListSlotView extends "res://addons/inventoric/base/slot_view.gd"
+class_name ICListSlotView extends "res://addons/inventoric/core/base/slot_view.gd"
 
-const ICSlotView = preload("res://addons/inventoric/base/slot_view.gd")
+const ICSlotView = preload("res://addons/inventoric/core/base/slot_view.gd")
 
 @onready var panel: Panel = $Panel
 
